@@ -1,1 +1,1 @@
-# docker-templates
+# vagrant-templates
