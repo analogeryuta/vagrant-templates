@@ -1,0 +1,29 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: mbo_production
+  pool: 5
+  username: karahi
+  password:
+  template: template0
+  host: /var/run/postgresql
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mbo_development
+  pool: 5
+  username: karahi
+  password:
+  template: template0
+  host: /var/run/postgresql
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: mbo_test
+  pool: 5
+  username: karahi
+  password:
+  template: template0
+  host: /var/run/postgresql

@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. 
+# Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define :debian_minimal do |minimal|
+    minimal.vm.box = "debian-minimal"
+    minimal.vm.hostname = "debian-minimal"
+
+    # Setting port forwarding for echo server's packet.
+    minimal.vm.network "forwarded_port", guest: 80, host: 8500
+    minimal.vm.network "forwarded_port", guest: 443, host: 8510
+
+
+    minimal.vm.provider "virtualbox" do |vb|
+      # Boot with headless mode
+      vb.gui = false
+      
+      # Use VBoxManage to customize the VM(memory, cpu).
+      vb.customize ["modifyvm", :id, "--memory", "256", "--cpus", "1"]
+    end
+    
+    # Setting for puppet provisioning
+    minimal.vm.provision "puppet" do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.manifest_file  = "default.pp"
+      puppet.options = ["--templatedir", "/vagrant/templates"]
+    end
+  end
+end

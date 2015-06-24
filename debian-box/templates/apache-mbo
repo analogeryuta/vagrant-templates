@@ -1,0 +1,4 @@
+<VirtualHost *:80>
+    ServerName karahi-mbo.example.com
+    DocumentRoot <%= @karahi_dir %>/public
+</VirtualHost>
