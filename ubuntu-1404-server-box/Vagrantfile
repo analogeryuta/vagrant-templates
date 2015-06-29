@@ -5,8 +5,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu1404-server-default"
-  config.vm.hostname = "ubuntu1404-server-default"
+  config.vm.box = "analogeryuta/ubuntu-1404-server-i386"
+  config.vm.hostname = "ubuntu-1404-server-i386"
 
   #config.vm.network "forwarded_port", guest: 80, host: 8500, host_ip: "127.0.0.1", auto_correct: true
 
@@ -21,11 +21,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "512", "--cpus", "2", "--ioapic", "on"]
   end
+  
+  # ssh public key using vagrant's insecure key.
+  config.ssh.private_key_path = "ENV['HOME']/.vagrant.d/insecure_private_key"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
-  # the file Debian-7.4-i386.pp in the manifests_path directory.
+  # the file (ex, manifests/default.pp).
   #
   # An example Puppet manifest to provision the message of the day:
   #
